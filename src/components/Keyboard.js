@@ -1,4 +1,5 @@
 import React from 'react'
+import Keybutton from './Keybutton';
 
 function Keyboard() {
   const keyset1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
@@ -6,20 +7,24 @@ function Keyboard() {
   const keyset3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
   return (
-    <div classname="keyboard">
-      <div classname="row1">
+    <div className="keyboard">
+      <div className="row1">
         {keyset1.map((key) => {
-          return key
+          return <Keybutton kVal={key} />
         })}
       </div>
-      <div classname="row2"></div>
-      {keyset2.map((key) => {
-          return key
+      <div className="row2">
+        {keyset2.map((key) => {
+          return <Keybutton kVal={key} />
         })}
-      <div classname="row3"></div>
-      {keyset3.map((key) => {
-          return key
+      </div>
+      <div className="row3">
+        <Keybutton kVal={"enter"}/>
+        {keyset3.map((key) => {
+          return <Keybutton kVal={key} />
         })}
+        <Keybutton kVal={"delete"}/>
+      </div>
     </div>
   )
 }

@@ -1,11 +1,24 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-function Board() {
+class Board extends React.Component {
+  state = {
 
-  
-  return (
-    <div>Board</div>
-  )
+  }
+
+  render() {
+    console.log(this.props.board)
+    return (
+      <div></div>
+    )
+  }
 }
 
-export default Board
+const mapStateToProps = (state) => {
+  return {
+    board: state.board,
+    location: state.location
+  }
+}
+
+export default connect(mapStateToProps)(Board);

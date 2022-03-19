@@ -10,18 +10,18 @@ function Keyboard() {
     <div className="keyboard">
       <div className="row1">
         {keyset1.map((key) => {
-          return <Keybutton kVal={key} />
+          return <Keybutton kVal={key} key={key} />
         })}
       </div>
       <div className="row2">
         {keyset2.map((key) => {
-          return <Keybutton kVal={key} />
+          return <Keybutton kVal={key} key={key}/>
         })}
       </div>
       <div className="row3">
         <Keybutton kVal={"enter"}/>
         {keyset3.map((key) => {
-          return <Keybutton kVal={key} />
+          return <Keybutton kVal={key} key={key}/>
         })}
         <Keybutton kVal={"delete"}/>
       </div>

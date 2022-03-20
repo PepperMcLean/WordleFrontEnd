@@ -51,7 +51,7 @@ nav h1 {
   margin: 5px;
 }
 
-.letter {
+.tile {
   flex: 33%;
   height: 100%;
   border: 1px solid grey;

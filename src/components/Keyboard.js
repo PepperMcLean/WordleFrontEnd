@@ -19,11 +19,11 @@ function Keyboard() {
         })}
       </div>
       <div className="row3">
-        <Keybutton kVal={"enter"}/>
+        <Keybutton kVal={"enter"} resize/>
         {keyset3.map((key) => {
           return <Keybutton kVal={key} key={key}/>
         })}
-        <Keybutton kVal={"delete"}/>
+        <Keybutton kVal={"delete"} resize/>
       </div>
     </div>
   )

@@ -9,10 +9,12 @@ class Board extends React.Component {
       <div className="board">
         {this.props.board.map((element, index) => {
           return (
-            <div className='row' key={index}> {element.map((value, index1) => {
-              return <Tile tVal={value} key={index1} />
+            <div className='row' key={index}> 
+              {element.map((value, index1) => {
+                return <Tile tVal={value} key={index1} />
             })}
-            </div>)
+            </div>
+          )
         })}
       </div>
     )

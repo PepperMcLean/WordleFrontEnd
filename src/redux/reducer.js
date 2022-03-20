@@ -1,3 +1,5 @@
+import { ADD_LETTER_TO_TILE } from "./actionTypes";
+
 const initialBoard = [
   ["x", "o", "x", "o", "x"],
   ["", "s", "", "", ""],
@@ -13,9 +15,9 @@ const initialState = {board: initialBoard, row: currentRow, tile: currentTile}
 
 function reducer(state = initialState, action){
   switch (action.type) {
-    // case ADD_LETTER_TO_TILE:
+    case ADD_LETTER_TO_TILE:
       
-    //   return 
+      return 
 
     default:
       return state;

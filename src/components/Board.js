@@ -24,7 +24,8 @@ class Board extends React.Component {
 const mapStateToProps = (state) => {
   return {
     board: state.board,
-    location: state.location
+    row: state.row,
+    tile: state.tile
   }
 }
 

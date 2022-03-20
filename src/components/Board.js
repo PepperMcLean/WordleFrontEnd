@@ -11,7 +11,7 @@ class Board extends React.Component {
           return (
             <div className='row' key={index}> 
               {element.map((value, index1) => {
-                return <Tile tVal={value} key={index1} />
+                return <Tile tVal={value} key={index1} currentRow={index} currentIndex={index1}/>
             })}
             </div>
           )

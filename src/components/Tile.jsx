@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 class Tile extends React.Component {
   
   render() {
-    const correct = this.props.correctWord[this.props.currentIndex] === this.props.tVal;
-    const present = !correct && this.props.tVal !== "" && this.props.correctWord.includes(this.props.tVal)
+    const correct = this.props.wordToGuess[this.props.currentIndex] === this.props.tVal;
+    const present = !correct && this.props.tVal !== "" && this.props.wordToGuess.includes(this.props.tVal)
     console.log(this.props.currentRow)
     const tileState = this.props.row > this.props.currentRow && (correct ? "correct" : present ? "present" : "incorrect")
     
@@ -16,7 +16,7 @@ class Tile extends React.Component {
 }
 // function Tile({tVal}) {
 
-//   console.log(Tile.props.correctWord)
+//   console.log(Tile.props.wordToGuess)
 //   return (
     
 //     <div className='tile'>{tVal}</div>
@@ -28,7 +28,7 @@ const mapStateToProps = (state) => {
     board: state.board,
     row: state.row,
     tile: state.tile,
-    correctWord: state.correctWord
+    wordToGuess: state.wordToGuess
   }
 }
 

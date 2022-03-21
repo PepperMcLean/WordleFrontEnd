@@ -1,4 +1,4 @@
-import { ADD_LETTER_TO_TILE } from "./actionTypes";
+import { ADD_LETTER_TO_TILE, ADD_WORD_TO_GUESS, LOADING_WORD_TO_GUESS } from "./actionTypes";
 
 const initialBoard = [
   ["", "", "", "", ""],
@@ -10,7 +10,7 @@ const initialBoard = [
 ];
 
 
-const initialState = {board: initialBoard, row: 0, tile: 0, correctWord: "five"};
+const initialState = {board: initialBoard, row: 0, tile: 0, wordToGuess: "FIVER"};
 
 function reducer(state = initialState, action){
   switch (action.type) {
@@ -37,6 +37,20 @@ function reducer(state = initialState, action){
       } else {
         return newState;
       }
+    case LOADING_WORD_TO_GUESS:
+      return {
+        ...state,
+        wordToGuess: [...state.wordToGuess],
+        requesting: true,
+      };
+
+    case ADD_WORD_TO_GUESS:
+      console.log(action.wordToGuess.word)
+      return {
+        ...state,
+        wordToGuess: action.wordToGuess.word.toUpperCase(),
+        requesting: false,
+      };
 
     default:
       return state;

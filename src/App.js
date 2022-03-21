@@ -2,18 +2,21 @@ import './App.css';
 import React, { Component} from 'react';
 import Board from './components/Board';
 import Keyboard from './components/Keyboard';
+import Message from './components/Message';
 import { connect } from "react-redux";
-import { fetchWordToGuess } from "./redux/actions" 
+import { fetchWordToGuess, fetchAllowedGuesses } from "./redux/actions" 
 
 class App extends Component {
   
   componentDidMount() {
     this.props.fetchWordToGuess();
+    this.props.fetchAllowedGuesses();
   }
 
   render(){
-    return (
+    return ( 
       <div className="App">
+        <Message/>
         <nav>
           <h1>Wordle</h1>
         </nav>
@@ -44,11 +47,17 @@ class App extends Component {
 //export default App;
 
 function mapDispatchToProps(dispatch) {
-  return { fetchWordToGuess: () => dispatch(fetchWordToGuess()) };
+  return {
+    fetchWordToGuess: () => dispatch(fetchWordToGuess()),
+    fetchAllowedGuesses: () => dispatch(fetchAllowedGuesses()) 
+  }
 }
 
 function mapStateToProps(state) {
-  return { wordToGuess: state.wordToGuess };
+  return { 
+    wordToGuess: state.wordToGuess, 
+    allowedGuesses: state.allowedGuesses
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

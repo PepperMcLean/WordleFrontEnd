@@ -1,4 +1,4 @@
-import { ADD_LETTER_TO_TILE, ADD_WORD_TO_GUESS, LOADING_WORD_TO_GUESS } from "./actionTypes";
+import { ADD_ALLOWED_GUESSES, ADD_LETTER_TO_TILE, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, LOADING_WORD_TO_GUESS } from "./actionTypes";
 
 const initialBoard = [
   ["", "", "", "", ""],
@@ -10,7 +10,7 @@ const initialBoard = [
 ];
 
 
-const initialState = {board: initialBoard, row: 0, tile: 0, wordToGuess: "FIVER"};
+const initialState = {board: initialBoard, row: 0, tile: 0, wordToGuess: "FIVER", allowedGuesses: [], requestingWordToGuess: false, requestingAllowedGuesses: false};
 
 function reducer(state = initialState, action){
   switch (action.type) {
@@ -25,9 +25,9 @@ function reducer(state = initialState, action){
         return newState;
       } else if (action.payload.letter === 'enter') {
         if (newState.tile === 5 && newState.row < 5) {
+          console.log(newState.allowedGuesses)
           newState.row += 1
           newState.tile = 0
-          console.log("it works")
         }
         return newState
       } else if (state.tile < 5) {
@@ -37,11 +37,12 @@ function reducer(state = initialState, action){
       } else {
         return newState;
       }
+      
     case LOADING_WORD_TO_GUESS:
       return {
         ...state,
         wordToGuess: [...state.wordToGuess],
-        requesting: true,
+        requestingWordToGuess: true,
       };
 
     case ADD_WORD_TO_GUESS:
@@ -49,9 +50,23 @@ function reducer(state = initialState, action){
       return {
         ...state,
         wordToGuess: action.wordToGuess.word.toUpperCase(),
-        requesting: false,
+        requestingWordToGuess: false,
       };
 
+    case LOADING_ALLOWED_GUESSES:
+      return {
+        ...state,
+        allowedGuesses: [...state.allowedGuesses],
+        requestingAllowedGuesses: true,
+      };       
+    
+    case ADD_ALLOWED_GUESSES:
+      console.log(action.allowedGuesses)
+      return {
+        ...state,
+        allowedGuesses: action.allowedGuesses,
+        requestingAllowedGuesses: false,
+      };
     default:
       return state;
   }

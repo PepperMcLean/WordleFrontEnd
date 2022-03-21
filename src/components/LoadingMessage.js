@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-class Message extends React.Component { 
+class LoadingMessage extends React.Component { 
   render() {
     if (this.props.requestingAllowedGuesses || this.props.requestingWordToGuess){
       return (
@@ -22,4 +22,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Message);
+export default connect(mapStateToProps)(LoadingMessage);

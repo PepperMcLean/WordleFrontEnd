@@ -18,18 +18,31 @@ function reducer(state = initialState, action){
       const newBoard = [...state.board];
       let newState = Object.assign({}, state);
       newState.board = newBoard;
+      
       if (action.payload.letter === 'delete') {
         console.log(newState.tile)
         newState.board[newState.row][newState.tile-1] = ""
         if (newState.tile > 0) newState.tile -= 1;
         return newState;
       } else if (action.payload.letter === 'enter') {
-        if (newState.tile === 5 && newState.row < 5) {
-          console.log(newState.allowedGuesses)
-          newState.row += 1
-          newState.tile = 0
+        if (newState.tile === 5 && newState.row < 6) {
+          let guess = newState.board[newState.row].join('').toLowerCase()
+          if (newState.allowedGuesses.includes(guess)) {// check to see if the guess is in the allowed guesses array
+            console.log(guess)
+            console.log(newState.wordToGuess)
+            if (guess.toUpperCase() === newState.wordToGuess){
+              console.log('winner')
+            } else if (newState.tile === 5 && newState.row === 5) {
+              console.log('loser')
+            } else {
+              newState.row += 1
+              newState.tile = 0
+            }
+          }
+          return newState
+        } else {
+          return newState
         }
-        return newState
       } else if (state.tile < 5) {
         newState.board[newState.row][newState.tile] = action.payload.letter;
         newState.tile += 1
@@ -37,7 +50,7 @@ function reducer(state = initialState, action){
       } else {
         return newState;
       }
-      
+
     case LOADING_WORD_TO_GUESS:
       return {
         ...state,

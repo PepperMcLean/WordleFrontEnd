@@ -2,7 +2,7 @@ import './App.css';
 import React, { Component} from 'react';
 import Board from './components/Board';
 import Keyboard from './components/Keyboard';
-import Message from './components/Message';
+import LoadingMessage from './components/LoadingMessage';
 import { connect } from "react-redux";
 import { fetchWordToGuess, fetchAllowedGuesses } from "./redux/actions" 
 
@@ -16,7 +16,7 @@ class App extends Component {
   render(){
     return ( 
       <div className="App">
-        <Message/>
+        <LoadingMessage/>
         <nav>
           <h1>Wordle</h1>
         </nav>

@@ -1,4 +1,4 @@
-import { ADD_ALLOWED_GUESSES, ADD_LETTER_TO_TILE, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, LOADING_WORD_TO_GUESS } from "./actionTypes";
+import { ADD_ALLOWED_GUESSES, ADD_LETTER_TO_TILE, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, LOADING_WORD_TO_GUESS, REINITIALIZE } from "./actionTypes";
 
 const initialBoard = [
   ["", "", "", "", ""],
@@ -80,8 +80,13 @@ function reducer(state = initialState, action){
         allowedGuesses: action.allowedGuesses,
         requestingAllowedGuesses: false,
       };
+    
+    case REINITIALIZE:
+      return initialState;
+
     default:
       return state;
+      
   }
 }
 

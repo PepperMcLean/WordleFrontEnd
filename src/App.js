@@ -12,9 +12,8 @@ function App() {
         <Board/>
         <Keyboard/>
       </div>
-      
     </div>
   );
 }
 
-export default App
+export default App;

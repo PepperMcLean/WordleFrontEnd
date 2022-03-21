@@ -9,7 +9,8 @@ const initialBoard = [
   ["", "", "", "", ""],
 ];
 
-const initialState = {board: initialBoard, row: 0, tile: 0, correctWord: "EARLY"};
+
+const initialState = {board: initialBoard, row: 0, tile: 0, correctWord: "five"};
 
 function reducer(state = initialState, action){
   switch (action.type) {

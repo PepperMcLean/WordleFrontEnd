@@ -47,11 +47,11 @@ function reducer(state = initialState, action){
             if (guess.toUpperCase() === newState.wordToGuess){
               console.log('winner')
               newState.gameWon = true;
-              window.location = '/victory'
+              // window.location = '/victory'
             } else if (newState.tile === 5 && newState.row === 5) {
               console.log('loser')
               newState.gameOver = true;
-              window.location = '/gameover'
+              // window.location = '/gameover'
             } else {
               newState.row += 1
               newState.tile = 0

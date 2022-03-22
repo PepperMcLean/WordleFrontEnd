@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addLetterToTile} from './../redux/actions'
-import Checkstate from './Checkstate'
+import { withRouter } from 'react-router-dom'
 
 class Keybutton extends React.Component {
 
@@ -10,7 +10,13 @@ class Keybutton extends React.Component {
     const selectLetter = () => {
       this.props.dispatchAddLetterToTile({
         letter: this.props.kVal
-      })
+      }).then(() => { 
+        if (this.props.history && this.props.gameWon){
+        console.log(1)
+        this.props.history.push('/victory');
+      } else if (this.props.history && this.props.gameOver) {
+        this.props.history.push('/gameover')
+      }})
     }
     return (
       <div className="button" id={this.props.resize && "big"} onClick={selectLetter} >{this.props.kVal}</div>
@@ -46,5 +52,5 @@ const mapStateToProps = (state) => {
 
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Keybutton) 
-export default connect(mapStateToProps, mapDispatchToProps)(Keybutton)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Keybutton))
 // export default Keybutton

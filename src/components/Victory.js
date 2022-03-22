@@ -3,13 +3,25 @@ import { connect } from 'react-redux'
 
 export class Victory extends Component {
   render() {
-    return (
-      <div>Victory</div>
-    )
+    console.log(this.props.gameWon)
+    if (this.props.gameWon) {
+      return (
+        
+        <div>Victory</div>
+      )
+    } else {
+      return (
+        <div>You should not be here!</div>
+      )
+    }
   }
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => {
+  return {    
+  gameWon: state.gameWon
+  }
+}
 
 const mapDispatchToProps = {}
 

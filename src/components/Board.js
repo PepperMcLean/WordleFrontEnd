@@ -2,9 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Tile from './Tile'
 
+
 class Board extends React.Component {
 
   render() {
+
     return (
       <div className="board">
         {this.props.board.map((element, index) => {

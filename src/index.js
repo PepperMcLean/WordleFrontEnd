@@ -5,15 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store'
-
-
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Victory from './components/Victory';
+import Gameover from './components/Gameover';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-
-      <App />
+      <Router >
+        <Route exact path="/" component={App}/>
+        <Route exact path="/victory" component={Victory}/>
+        <Route exact path="/gameover" component={Gameover}/>
+      </Router>
     </Provider>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

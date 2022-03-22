@@ -1,5 +1,6 @@
 import { ADD_ALLOWED_GUESSES, ADD_LETTER_TO_TILE, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, LOADING_WORD_TO_GUESS, REINITIALIZE } from "./actionTypes";
 
+
 const initialBoard = [
   ["", "", "", "", ""],
   ["", "", "", "", ""],
@@ -10,11 +11,24 @@ const initialBoard = [
 ];
 
 
-const initialState = {board: initialBoard, row: 0, tile: 0, wordToGuess: "FIVER", allowedGuesses: [], requestingWordToGuess: false, requestingAllowedGuesses: false};
+const initialState = {
+  board: initialBoard, 
+  row: 0, 
+  tile: 0, 
+  wordToGuess: "FIVER", 
+  allowedGuesses: [], 
+  requestingWordToGuess: false, 
+  requestingAllowedGuesses: false, 
+  gameOver: false, 
+  gameWon: false
+};
+
 
 function reducer(state = initialState, action){
   switch (action.type) {
+
     case ADD_LETTER_TO_TILE:
+
       const newBoard = [...state.board];
       let newState = Object.assign({}, state);
       newState.board = newBoard;
@@ -32,8 +46,12 @@ function reducer(state = initialState, action){
             console.log(newState.wordToGuess)
             if (guess.toUpperCase() === newState.wordToGuess){
               console.log('winner')
+              newState.gameWon = true;
+              window.location = '/victory'
             } else if (newState.tile === 5 && newState.row === 5) {
               console.log('loser')
+              newState.gameOver = true;
+              window.location = '/gameover'
             } else {
               newState.row += 1
               newState.tile = 0

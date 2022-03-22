@@ -1,8 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addLetterToTile} from './../redux/actions'
+import Checkstate from './Checkstate'
 
 class Keybutton extends React.Component {
+
+
   render() {
     const selectLetter = () => {
       this.props.dispatchAddLetterToTile({
@@ -34,15 +37,14 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     board: state.board,
-//     row: state.row,
-//     tile: state.tile
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    gameOver: state.gameOver,
+    gameWon: state.gameWon
+  }
+}
 
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Keybutton) 
-export default connect(null, mapDispatchToProps)(Keybutton) 
+export default connect(mapStateToProps, mapDispatchToProps)(Keybutton)
 // export default Keybutton

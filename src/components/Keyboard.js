@@ -1,7 +1,7 @@
 import React from 'react'
 import Keybutton from './Keybutton';
 
-function Keyboard() {
+function Keyboard(history) {
   const keyset1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
   const keyset2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const keyset3 = ["Z", "X", "C", "V", "B", "N", "M"];
@@ -10,16 +10,16 @@ function Keyboard() {
     <div className="keyboard">
       <div className="row1">
         {keyset1.map((key) => {
-          return <Keybutton kVal={key} key={key} />
+          return <Keybutton kVal={key} key={key}/>
         })}
       </div>
       <div className="row2">
         {keyset2.map((key) => {
-          return <Keybutton kVal={key} key={key}/>
+          return <Keybutton kVal={key} key={key} />
         })}
       </div>
       <div className="row3">
-        <Keybutton kVal={"enter"} resize/>
+        <Keybutton kVal={"enter"} resize history={history}/>
         {keyset3.map((key) => {
           return <Keybutton kVal={key} key={key}/>
         })}

@@ -11,9 +11,16 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchWordToGuess();
     this.props.fetchAllowedGuesses();
+
   }
 
   render(){
+    // if (this.props.history && this.props.gameWon){
+    //   console.log(1)
+    //   this.props.history.push('/victory');
+    // } else if (this.props.history && this.props.gameOver) {
+    //   this.props.history.push('/gameover')
+    // }
     return ( 
       <div className="App">
         <LoadingMessage/>
@@ -22,8 +29,9 @@ class App extends Component {
         </nav>
         <div className='game'>
           <Board/>
-          <Keyboard/>
+          <Keyboard history={this.props.history}/>
         </div>
+        
       </div>
     );
   }
@@ -56,7 +64,9 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return { 
     wordToGuess: state.wordToGuess, 
-    allowedGuesses: state.allowedGuesses
+    allowedGuesses: state.allowedGuesses,
+    gameOver: state.gameOver,
+    gameWon: state.gameWon
   }
 }
 

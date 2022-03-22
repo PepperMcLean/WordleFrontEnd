@@ -16,6 +16,8 @@ const initialState = {
   row: 0, 
   tile: 0, 
   wordToGuess: "FIVER", 
+  timesPlayed: 0,
+  wordToGuessId: 0,
   allowedGuesses: [], 
   requestingWordToGuess: false, 
   requestingAllowedGuesses: false, 
@@ -46,10 +48,12 @@ function reducer(state = initialState, action){
             console.log(newState.wordToGuess)
             if (guess.toUpperCase() === newState.wordToGuess){
               console.log('winner')
+              newState.timesPlayed += 1;
               newState.gameWon = true;
               // window.location = '/victory'
             } else if (newState.tile === 5 && newState.row === 5) {
               console.log('loser')
+              newState.timesPlayed += 1;
               newState.gameOver = true;
               // window.location = '/gameover'
             } else {
@@ -72,14 +76,16 @@ function reducer(state = initialState, action){
     case LOADING_WORD_TO_GUESS:
       return {
         ...state,
-        wordToGuess: [...state.wordToGuess],
         requestingWordToGuess: true,
       };
 
     case ADD_WORD_TO_GUESS:
       console.log(action.wordToGuess.word)
+      console.log(action.wordToGuess.id)
       return {
         ...state,
+        wordToGuessId: action.wordToGuess.id,
+        timesPlayed: action.wordToGuess.played,
         wordToGuess: action.wordToGuess.word.toUpperCase(),
         requestingWordToGuess: false,
       };
@@ -87,7 +93,6 @@ function reducer(state = initialState, action){
     case LOADING_ALLOWED_GUESSES:
       return {
         ...state,
-        allowedGuesses: [...state.allowedGuesses],
         requestingAllowedGuesses: true,
       };       
     

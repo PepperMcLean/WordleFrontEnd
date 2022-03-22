@@ -1,8 +1,11 @@
-import { ADD_LETTER_TO_TILE, LOADING_WORD_TO_GUESS, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, ADD_ALLOWED_GUESSES } from "./actionTypes";
+import { ADD_LETTER_TO_TILE, LOADING_WORD_TO_GUESS, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, ADD_ALLOWED_GUESSES, REINITIALIZE } from "./actionTypes";
 
 //export const addLetterToTile = letter => ({type: ADD_LETTER_TO_TILE, payload: letter})
 //export const fetchWordToGuess = () => ({type: FETCH_WORD_TO_GUESS, payload: fetch("http://localhost:3001/word_answers").then((response) => response.json())})
 
+export const resetState = () => (dispatch) => {
+  dispatch ({type: REINITIALIZE})
+}
 
 export const addLetterToTile = letter => (dispatch, getState) => {
   dispatch ({
@@ -11,25 +14,6 @@ export const addLetterToTile = letter => (dispatch, getState) => {
   });
   return Promise.resolve(getState());
 }
-
-// export const updateAlert = (alert, message) => {
-//   return {
-//     type: 'UPDATE_ALERT',
-//     alert,
-//     message
-//   }
-// }
-
-// export const updateAlert = (alert, message) => (dispatch, getState) => {  
-//   dispatch ({
-//     type: 'UPDATE_ALERT',
-//     alert,
-//     message
-//   });
-//   return Promise.resolve(getState());
-//   // or just Promise.resolve();
-
-
 
 export function fetchWordToGuess() {
   return (dispatch) => {
@@ -50,3 +34,38 @@ export function fetchAllowedGuesses() {
  
   };
 }
+
+export function postTimesPlayed(data) {
+  fetch(`http://localhost:3001/word_answers/${data.id}`, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+}
+
+
+
+
+// export function postTimesPlayed(data) {
+//   return (dispatch) => {
+//     fetch(`http://localhost:3001/word_answers/${data.id}`, {
+//       method: "PATCH",
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//       },
+//       body: JSON.stringify(data)
+//     })
+//     .then((response) => {
+//       if (response.ok) {
+//         response.json().then()
+//       } else {
+//         response.json().then(error => console.error(error))
+//       }
+//     })
+//   }
+// }
+

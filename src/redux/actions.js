@@ -1,7 +1,11 @@
-import { ADD_LETTER_TO_TILE, LOADING_WORD_TO_GUESS, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, ADD_ALLOWED_GUESSES, REINITIALIZE } from "./actionTypes";
+import { ADD_LETTER_TO_TILE, LOADING_WORD_TO_GUESS, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, ADD_ALLOWED_GUESSES, REINITIALIZE, SET_CURRENTLY_GUESSING_TO_FALSE } from "./actionTypes";
 
 //export const addLetterToTile = letter => ({type: ADD_LETTER_TO_TILE, payload: letter})
 //export const fetchWordToGuess = () => ({type: FETCH_WORD_TO_GUESS, payload: fetch("http://localhost:3001/word_answers").then((response) => response.json())})
+
+export const setCurrenctlyGuessingToFalse = () => (dispatch) => {
+  dispatch ({type: SET_CURRENTLY_GUESSING_TO_FALSE})
+}
 
 export const resetState = () => (dispatch) => {
   dispatch ({type: REINITIALIZE})

@@ -1,4 +1,4 @@
-import { ADD_ALLOWED_GUESSES, ADD_LETTER_TO_TILE, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, LOADING_WORD_TO_GUESS, REINITIALIZE } from "./actionTypes";
+import { ADD_ALLOWED_GUESSES, ADD_LETTER_TO_TILE, ADD_WORD_TO_GUESS, LOADING_ALLOWED_GUESSES, LOADING_WORD_TO_GUESS, REINITIALIZE, SET_CURRENTLY_GUESSING_TO_FALSE } from "./actionTypes";
 
 
 const initialBoard = [
@@ -22,7 +22,8 @@ const initialState = {
   requestingWordToGuess: false, 
   requestingAllowedGuesses: false, 
   gameOver: false, 
-  gameWon: false
+  gameWon: false,
+  currentlyGuessing: false
 };
 
 
@@ -34,25 +35,21 @@ function reducer(state = initialState, action){
       const newBoard = [...state.board];
       let newState = Object.assign({}, state);
       newState.board = newBoard;
-      
+      newState.currentlyGuessing = false
       if (action.payload.letter === 'delete') {
-        console.log(newState.tile)
         newState.board[newState.row][newState.tile-1] = ""
         if (newState.tile > 0) newState.tile -= 1;
         return newState;
       } else if (action.payload.letter === 'enter') {
         if (newState.tile === 5 && newState.row < 6) {
           let guess = newState.board[newState.row].join('').toLowerCase()
+
           if (newState.allowedGuesses.includes(guess)) {// check to see if the guess is in the allowed guesses array
-            console.log(guess)
-            console.log(newState.wordToGuess)
             if (guess.toUpperCase() === newState.wordToGuess){
-              console.log('winner')
               newState.timesPlayed += 1;
               newState.gameWon = true;
               // window.location = '/victory'
             } else if (newState.tile === 5 && newState.row === 5) {
-              console.log('loser')
               newState.timesPlayed += 1;
               newState.gameOver = true;
               // window.location = '/gameover'
@@ -60,7 +57,9 @@ function reducer(state = initialState, action){
               newState.row += 1
               newState.tile = 0
             }
-          }
+          } else {
+            newState.currentlyGuessing = true
+          } 
           return newState
         } else {
           return newState
@@ -105,7 +104,14 @@ function reducer(state = initialState, action){
       };
     
     case REINITIALIZE:
-      return initialState;
+      window.location.assign('/')
+      return state;
+
+    case SET_CURRENTLY_GUESSING_TO_FALSE:
+      return {
+        ...state,
+        currentlyGuessing :false
+      }
 
     default:
       return state;

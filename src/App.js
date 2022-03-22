@@ -5,6 +5,8 @@ import Keyboard from './components/Keyboard';
 import LoadingMessage from './components/LoadingMessage';
 import { connect } from "react-redux";
 import { fetchWordToGuess, fetchAllowedGuesses } from "./redux/actions" 
+import Navbar from './components/Navbar';
+import FlashMessage from './components/FlashMessage';
 
 class App extends Component {
   
@@ -15,18 +17,12 @@ class App extends Component {
   }
 
   render(){
-    // if (this.props.history && this.props.gameWon){
-    //   console.log(1)
-    //   this.props.history.push('/victory');
-    // } else if (this.props.history && this.props.gameOver) {
-    //   this.props.history.push('/gameover')
-    // }
+
     return ( 
       <div className="App">
+        <FlashMessage/>
         <LoadingMessage/>
-        <nav>
-          <h1>Wordle</h1>
-        </nav>
+        <Navbar/>
         <div className='game'>
           <Board/>
           <Keyboard history={this.props.history}/>

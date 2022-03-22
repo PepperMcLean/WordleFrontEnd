@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postTimesPlayed, resetState } from '../redux/actions'
+import Navbar from './Navbar'
 
 export class Victory extends Component {
   componentDidMount() {
@@ -10,19 +11,25 @@ export class Victory extends Component {
       console.log('it works')
     }
   }
+
   render() {
     let thatWord = {word: this.props.wordToGuess.toLowerCase(), id: this.props.wordToGuessId, played: (this.props.timesPlayed)}
     console.log(this.props.gameWon)
     if (this.props.gameWon) {
       return (
-        <div>
+
+        <div className="App">
+          <Navbar/>
           <div>Victory!</div>
           <div>The word {this.props.wordToGuess.toLowerCase()} has been played {this.props.timesPlayed} time(s)!</div>
         </div>
       )
     } else {
       return (
-        <div>You should not be here!</div>
+        <div className="App">
+          <Navbar/>
+          <div>You should not be here!</div>
+        </div>
       )
     }
   }

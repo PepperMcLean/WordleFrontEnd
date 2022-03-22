@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postTimesPlayed } from '../redux/actions'
+import Navbar from './Navbar'
 
 export class Gameover extends Component {
   componentDidMount() {
@@ -11,10 +12,12 @@ export class Gameover extends Component {
     }
   }
   render() {
+
     console.log(this.props.gameOver)
     if (this.props.gameOver) {
       return (
-        <div>
+        <div className="App">
+          <Navbar/>
           <div>Game Over!</div>
           <div>The word was {this.props.wordToGuess.toLowerCase()}.</div>
           <div>The word {this.props.wordToGuess.toLowerCase()} has been played {this.props.timesPlayed} time(s)!</div>
@@ -22,7 +25,10 @@ export class Gameover extends Component {
       )
     } else {
       return (
-        <div>You should not be here!</div>
+        <div className='App'>
+          <Navbar/>
+          <div>You should not be here!</div>
+        </div>
       )
     }
   }
